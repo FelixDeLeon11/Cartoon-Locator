@@ -79,7 +79,7 @@ public class CartoonListActivity extends Fragment {
                         Log.i(TAG, "Successful Request");
                         int pages = response.jsonObject.getInt("total_pages");
                         client.setTotalPages(pages);
-                        shows.addAll(Show.fromJsonArray(jsonShows));
+                        showAdapter.addMoreContacts(Show.fromJsonArray(jsonShows));
                         Log.i(TAG, "Got the shows into array list");
                         showAdapter.notifyDataSetChanged();
                     }

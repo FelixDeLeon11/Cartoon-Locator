@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -16,13 +18,35 @@ import com.example.cartoonlocator.R;
 
 import java.util.List;
 
-public class MainShowListAdapter extends RecyclerView.Adapter<MainShowListAdapter.ViewHolder> {
+public class MainShowListAdapter extends ListAdapter<Show, MainShowListAdapter.ViewHolder> {
     List<Show> shows;
     Context context;
 
+    public static final DiffUtil.ItemCallback<Show> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<Show>() {
+                @Override
+                public boolean areItemsTheSame(Show oldItem, Show newItem) {
+                    return oldItem.getId() == newItem.getId();
+                }
+                @Override
+                public boolean areContentsTheSame(Show oldItem, Show newItem) {
+                    return (oldItem.getName().equals(newItem.getName()));
+                }
+            };
+
     public MainShowListAdapter(Context context, List<Show> shows){
+        this();
         this.shows = shows;
         this.context = context;
+    }
+
+    public  MainShowListAdapter(){
+        super(DIFF_CALLBACK);
+    }
+
+    public void addMoreContacts(List<Show> newShows) {
+        shows.addAll(newShows);
+        submitList(newShows); // DiffUtil takes care of the check
     }
 
     @NonNull
@@ -34,13 +58,8 @@ public class MainShowListAdapter extends RecyclerView.Adapter<MainShowListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Show show = shows.get(position);
+        Show show = getItem(position);
         holder.bind(show);
-    }
-
-    @Override
-    public int getItemCount() {
-        return shows.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

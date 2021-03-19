@@ -42,4 +42,12 @@ public class Show {
     public String getBackdrop() {
         return String.format("https://image.tmdb.org/t/p/w342/%s",backdrop);
     }
+
+    public int getId(){
+        return showId;
+    }
+
+    public String  getName() {
+        return title;
+    }
 }
