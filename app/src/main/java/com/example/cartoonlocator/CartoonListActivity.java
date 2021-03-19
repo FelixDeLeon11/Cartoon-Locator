@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.cartoonlocator.BookClient.ShowClient;
@@ -38,6 +39,7 @@ public class CartoonListActivity extends Fragment {
     public static final String TAG = "CartoonListActivity";
     private ShowClient client;
     List<Show> shows;
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -64,8 +66,6 @@ public class CartoonListActivity extends Fragment {
         MainShowListAdapter showAdapter = new MainShowListAdapter(getContext(), shows);
         rvShows.setAdapter(showAdapter);
         rvShows.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
 
         client = new ShowClient();
         client.getShowsList(new JsonHttpResponseHandler() {
