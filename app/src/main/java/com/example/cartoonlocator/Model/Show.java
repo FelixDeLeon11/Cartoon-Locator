@@ -13,20 +13,22 @@ public class Show {
     String backdrop;
     String title;
     int showId;
+    int page;
 
     public Show(){} // For Parceler
 
-    public Show(JSONObject jsonObject) throws JSONException {
+    public Show(JSONObject jsonObject, int page) throws JSONException {
         backdrop = jsonObject.getString("backdrop_path");
         title = jsonObject.getString("name");
         showId = jsonObject.getInt("id");
+        this.page = page;
     }
 
     // Obtain an array list from the json
-    public static List<Show> fromJsonArray(JSONArray showJsonArray) throws JSONException {
+    public static List<Show> fromJsonArray(JSONArray showJsonArray, int page) throws JSONException {
         List<Show> shows = new ArrayList<>();
         for (int i =0; i < showJsonArray.length(); i++){
-            shows.add(new Show(showJsonArray.getJSONObject(i)));
+            shows.add(new Show(showJsonArray.getJSONObject(i) , page));
         }
         return  shows;
     }
@@ -41,13 +43,5 @@ public class Show {
 
     public String getBackdrop() {
         return String.format("https://image.tmdb.org/t/p/w342/%s",backdrop);
-    }
-
-    public int getId(){
-        return showId;
-    }
-
-    public String  getName() {
-        return title;
     }
 }

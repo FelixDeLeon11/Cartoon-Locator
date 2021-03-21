@@ -39,7 +39,7 @@ public class CartoonListActivity extends Fragment {
     public static final String TAG = "CartoonListActivity";
     private ShowClient client;
     List<Show> shows;
-
+    int maxPage;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -76,10 +76,11 @@ public class CartoonListActivity extends Fragment {
                     if (response != null) {
                         // Get the results json array
                         jsonShows = response.jsonObject.getJSONArray("results");
+                        maxPage = response.jsonObject.getInt("page");
                         Log.i(TAG, "Successful Request");
                         int pages = response.jsonObject.getInt("total_pages");
                         client.setTotalPages(pages);
-                        showAdapter.addMoreContacts(Show.fromJsonArray(jsonShows));
+                        showAdapter.addMoreContacts(Show.fromJsonArray(jsonShows, maxPage));
                         Log.i(TAG, "Got the shows into array list");
                         showAdapter.notifyDataSetChanged();
                     }

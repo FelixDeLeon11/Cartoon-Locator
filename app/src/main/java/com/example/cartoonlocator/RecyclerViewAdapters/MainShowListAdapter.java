@@ -26,11 +26,11 @@ public class MainShowListAdapter extends ListAdapter<Show, MainShowListAdapter.V
             new DiffUtil.ItemCallback<Show>() {
                 @Override
                 public boolean areItemsTheSame(Show oldItem, Show newItem) {
-                    return oldItem.getId() == newItem.getId();
+                    return oldItem.getShowId() == newItem.getShowId();
                 }
                 @Override
                 public boolean areContentsTheSame(Show oldItem, Show newItem) {
-                    return (oldItem.getName().equals(newItem.getName()));
+                    return (oldItem.getTitle().equals(newItem.getTitle()));
                 }
             };
 
