@@ -33,6 +33,10 @@ public class Show {
         return  shows;
     }
 
+    public int getPage() {
+        return page;
+    }
+
     public String getTitle() {
         return title;
     }

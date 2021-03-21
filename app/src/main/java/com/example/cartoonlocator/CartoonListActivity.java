@@ -5,6 +5,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.paging.LivePagedListBuilder;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,7 +42,8 @@ import okhttp3.Headers;
 public class CartoonListActivity extends Fragment {
     public static final String TAG = "CartoonListActivity";
     private ShowClient client;
-    List<Show> shows;
+    //List<Show> shows;
+    LiveData<PagedList<Show>> shows;
     int maxPage;
 
     @Override
@@ -60,15 +65,32 @@ public class CartoonListActivity extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_cartoon_list, container, false);
-        shows = new ArrayList<>();
+        //shows = new ArrayList<>();
 
         RecyclerView rvShows = view.findViewById(R.id.mainShowList);
-        MainShowListAdapter showAdapter = new MainShowListAdapter(getContext(), shows);
+        //MainShowListAdapter showAdapter = new MainShowListAdapter(getContext(), shows);
+        MainShowListAdapter showAdapter = new MainShowListAdapter(getContext());
         rvShows.setAdapter(showAdapter);
         rvShows.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        PagedList.Config config = new PagedList.Config.Builder().setPageSize(20).build();
+
         client = new ShowClient();
-        client.getShowsList(new JsonHttpResponseHandler() {
+
+        ShowDataSourceFactory factory = new ShowDataSourceFactory(client);
+
+        shows = new LivePagedListBuilder(factory, config).build();
+
+        shows.observe(this, new Observer<PagedList<Show>>() {
+            @Override
+            public void onChanged(PagedList<Show> shows) {
+                showAdapter.submitList(shows);
+            }
+        });
+
+
+
+        /*client.getShowsList(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON response) {
                 try {
@@ -96,7 +118,7 @@ public class CartoonListActivity extends Fragment {
                 Log.e(TAG,
                         "Request failed with code " + statusCode + ". Response message: " + responseString);
             }
-        });
+        });*/
         return view;
     }
 }

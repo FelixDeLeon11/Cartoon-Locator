@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.paging.PagedList;
+import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +20,7 @@ import com.example.cartoonlocator.R;
 
 import java.util.List;
 
-public class MainShowListAdapter extends ListAdapter<Show, MainShowListAdapter.ViewHolder> {
+public class MainShowListAdapter extends PagedListAdapter<Show, MainShowListAdapter.ViewHolder> {
     List<Show> shows;
     Context context;
 
@@ -34,9 +36,8 @@ public class MainShowListAdapter extends ListAdapter<Show, MainShowListAdapter.V
                 }
             };
 
-    public MainShowListAdapter(Context context, List<Show> shows){
+    public MainShowListAdapter(Context context){
         this();
-        this.shows = shows;
         this.context = context;
     }
 
@@ -44,7 +45,8 @@ public class MainShowListAdapter extends ListAdapter<Show, MainShowListAdapter.V
         super(DIFF_CALLBACK);
     }
 
-    public void addMoreContacts(List<Show> newShows) {
+    //TODO OOOOOOOOOOOOOOOOOOOOOO
+    public void addMoreContacts(PagedList<Show> newShows) {
         shows.addAll(newShows);
         submitList(newShows); // DiffUtil takes care of the check
     }
@@ -59,6 +61,11 @@ public class MainShowListAdapter extends ListAdapter<Show, MainShowListAdapter.V
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Show show = getItem(position);
+
+        if (show == null){
+            return;
+        }
+
         holder.bind(show);
     }
 
