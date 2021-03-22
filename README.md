@@ -7,7 +7,7 @@ Completed Functionality:
 - [ ] Option to view which shows initially aired in different ranges of years.
 - [ ] Shows can be clicked and a detailed view of the show will be presented with options for where the show can be watched.
 - [ ] Users can search for a specific show.
-- [ ] Snap to the first item in RecyclerView lists.
+- [x] Snap to the first item in RecyclerView lists.
 - [ ] Add transitions.
 - [x] Functionality to add more pages of shows when scrolling to the end of the RecyclerView.
 
