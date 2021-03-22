@@ -19,24 +19,14 @@
         <!--   app:title="Menu"   -->
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mainShowList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="16dp"
-        android:paddingTop="0dp"
-        android:paddingEnd="16dp">
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:paddingRight="16dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mainShowList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:paddingLeft="8dp"
-            android:paddingTop="8dp"
-            android:paddingRight="8dp">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-    </androidx.core.widget.NestedScrollView>
-
+    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

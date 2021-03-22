@@ -55,11 +55,13 @@ public class CartoonListActivity extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         setHasOptionsMenu(true);
     }
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
+
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,9 +89,6 @@ public class CartoonListActivity extends Fragment {
                 showAdapter.submitList(shows);
             }
         });
-
-
-
         /*client.getShowsList(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON response) {

@@ -23,7 +23,6 @@ public class Show {
         showId = jsonObject.getInt("id");
         this.page = page;
     }
-
     // Obtain an array list from the json
     public static List<Show> fromJsonArray(JSONArray showJsonArray, int page) throws JSONException {
         List<Show> shows = new ArrayList<>();

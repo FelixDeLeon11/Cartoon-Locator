@@ -33,6 +33,24 @@ public class ShowDataSource extends ItemKeyedDataSource<Integer, Show>{
         mClient.getShowsList(jsonHttpResponseHandler);
     }
 
+    @Override
+    public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Show> callback) {
+        Log.i(TAG, "NEED MORE DATA - Load After "+ params.key.toString());
+        JsonHttpResponseHandler jsonHttpResponseHandler = createShowHandler(callback, true);
+        mClient.getNextShowsList(jsonHttpResponseHandler, params.key+1);
+    }
+
+    @Override
+    public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Show> callback) {
+        Log.i(TAG, "NEED MORE DATA - Load Before");
+    }
+
+    @NonNull
+    @Override
+    public Integer getKey(@NonNull Show item) {
+        return item.getPage();
+    }
+
     private JsonHttpResponseHandler createShowHandler(final LoadCallback<Show> callback, boolean isAsync) {
         JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
             @Override
@@ -66,21 +84,5 @@ public class ShowDataSource extends ItemKeyedDataSource<Integer, Show>{
             }
         };
         return handler;
-    }
-
-    @Override
-    public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Show> callback) {
-        Log.i(TAG, "NEED MORE DATA - Load After "+ params.key.toString());
-    }
-
-    @Override
-    public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Show> callback) {
-        Log.i(TAG, "NEED MORE DATA - Load Before");
-    }
-
-    @NonNull
-    @Override
-    public Integer getKey(@NonNull Show item) {
-        return item.getPage();
     }
 }
