@@ -9,7 +9,7 @@ Completed Functionality:
 - [ ] Users can search for a specific show.
 - [ ] Snap to the first item in RecyclerView lists.
 - [ ] Add transitions.
-- [ ] Functionality to add more pages of shows when scrolling to the end of the RecyclerView.
+- [x] Functionality to add more pages of shows when scrolling to the end of the RecyclerView.
 
 ## Video Walkthrough
 
