@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="30dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
     app:cardElevation="5dp">
 
     <LinearLayout
@@ -16,7 +17,10 @@
         <ImageView
             android:id="@+id/showImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="180dp"
+            android:scaleType="fitXY"
+            android:scaleX="1"
+            android:scaleY="1"
             tools:srcCompat="@tools:sample/avatars">
 
         </ImageView>

@@ -14,8 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CartoonLocator">
-        <activity android:name=".ShowDetailActivity"></activity>
-        <activity android:name=".CartoonListActivity" />
+        <activity android:name=".Fragments.ShowDetailActivity"></activity>
+        <activity android:name=".Fragments.CartoonListActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

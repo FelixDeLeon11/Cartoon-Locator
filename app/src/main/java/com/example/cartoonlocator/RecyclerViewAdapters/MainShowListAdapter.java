@@ -1,6 +1,7 @@
 package com.example.cartoonlocator.RecyclerViewAdapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,6 @@ public class MainShowListAdapter extends PagedListAdapter<Show, MainShowListAdap
         if (show == null){
             return;
         }
-
         holder.bind(show);
     }
 
@@ -81,7 +81,7 @@ public class MainShowListAdapter extends PagedListAdapter<Show, MainShowListAdap
         public void bind(Show show){
             name.setText(show.getTitle());
             String imageURL = show.getBackdrop();
-            Glide.with(context).load(imageURL).into(showImage);
+            Glide.with(context).load(imageURL).placeholder(R.drawable.ic_image_gallery).into(showImage);
         }
     }
 }

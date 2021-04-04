@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CartoonListActivity"
+    tools:context=".Fragments.CartoonListActivity"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="46dp">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:navigationIcon="@drawable/ic_baseline_menu"
-             />
+            app:navigationIcon="@drawable/ic_baseline_menu" />
         <!--   app:title="Menu"   -->
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -24,9 +24,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:paddingLeft="16dp"
-        android:paddingTop="8dp"
-        android:paddingRight="16dp">
+        android:paddingStart="26dp"
+        android:paddingEnd="26dp">
 
     </androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>

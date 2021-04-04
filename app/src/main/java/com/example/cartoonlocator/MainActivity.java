@@ -6,7 +6,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import com.example.cartoonlocator.Fragments.CartoonListActivity;
+
 public class MainActivity extends AppCompatActivity implements NavigationHost {
+    Fragment fragmentTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,17 +24,23 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         }
     }
 
+    public void GOTO(Fragment fragment){
+        fragmentTO = fragment;
+    };
+
     @Override
     public void navigateTo(Fragment fragment, boolean addToBackstack) {
         FragmentTransaction transaction =
                 getSupportFragmentManager()
-                        .beginTransaction()
+                        .beginTransaction()    //.hide(fragment);
                         .replace(R.id.container, fragment);
 
+//        transaction.add(R.id.container, fragmentTO);
         if (addToBackstack) {
             transaction.addToBackStack(null);
         }
 
         transaction.commit();
     }
+
 }
