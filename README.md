@@ -1,6 +1,6 @@
 # **Cartoon-Locator**
 
-**Cartoon-Locator** is a simple android app that allows users to find where they can watch new and classic cartoons originating from the United States.
+**Cartoon-Locator** is a simple android app that allows users to find where they can watch new and classic cartoons originating from the United States. App uses The Movie Database (TMDb) API. 
 Completed Functionality:
 
 - [x] User is welcomed to a list of the most popular cartoons in the US in decreasing popularity.
