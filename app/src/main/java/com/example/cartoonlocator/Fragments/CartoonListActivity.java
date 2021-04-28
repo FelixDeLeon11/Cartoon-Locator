@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -20,6 +22,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
@@ -31,6 +34,7 @@ import com.example.cartoonlocator.R;
 import com.example.cartoonlocator.RecyclerViewAdapters.MainShowListAdapter;
 import com.example.cartoonlocator.ShowDataSourceFactory;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
+import com.google.android.material.navigation.NavigationView;
 
 public class CartoonListActivity extends Fragment {
     public static final String TAG = "CartoonListActivity";
@@ -41,6 +45,11 @@ public class CartoonListActivity extends Fragment {
     public MainShowListAdapter showAdapter;
     public LinearLayoutManager manager;
     public RecyclerView rvShows;
+    public PagedList.Config config;
+
+    private DrawerLayout mDrawer;
+    private Toolbar toolbar;
+    private NavigationView nvDrawer;
 
     public CartoonListActivity(){}
 
@@ -58,7 +67,7 @@ public class CartoonListActivity extends Fragment {
         client = new ShowClient();
 
         factory = new ShowDataSourceFactory(client);
-        PagedList.Config config = new PagedList.Config.Builder().setPageSize(20).build();
+        config = new PagedList.Config.Builder().setPageSize(20).build();
 
         shows = new LivePagedListBuilder(factory, config).build();
         shows.observe(this, new Observer<PagedList<Show>>() {
@@ -95,10 +104,60 @@ public class CartoonListActivity extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        Toolbar toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
+        toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar( toolbar );
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mDrawer = (DrawerLayout) getView().findViewById(R.id.drawer_layout);
+        nvDrawer = (NavigationView) getView().findViewById(R.id.nvView);
+        setupDrawerContent(nvDrawer);
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                selectDrawerItem(menuItem);
+                return true;
+            }
+        });
+    }
+
+    private void selectDrawerItem(MenuItem menuItem) {
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+        Fragment fragment = null;
+        Class fragmentClass;
+        switch(menuItem.getItemId()) {
+            case R.id.nav_first_fragment:
+                fragmentClass = CartoonListActivity.class;
+                break;
+            case R.id.nav_second_fragment:
+                fragmentClass = CartoonListActivity.class;
+                break;
+            case R.id.nav_third_fragment:
+                fragmentClass = CartoonListActivity.class;
+                break;
+            default:
+                fragmentClass = CartoonListActivity.class;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ((NavigationHost) getActivity()).navigateTo(fragment, true);
+
+        // Highlight the selected item has been done by NavigationView
+        menuItem.setChecked(true);
+        // Set action bar title
+//        setTitle(menuItem.getTitle());
+        // Close the navigation drawer
+        mDrawer.closeDrawers();
+
     }
 
     @Override
@@ -123,5 +182,15 @@ public class CartoonListActivity extends Fragment {
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawer.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

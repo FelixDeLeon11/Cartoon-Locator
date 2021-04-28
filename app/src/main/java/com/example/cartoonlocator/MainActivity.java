@@ -32,14 +32,18 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
     public void navigateTo(Fragment fragment, boolean addToBackstack) {
         FragmentTransaction transaction =
                 getSupportFragmentManager()
-                        .beginTransaction()    //.hide(fragment);
+                        .beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.slide_in,
+                                R.anim.fade_out,
+                                R.anim.fade_in,
+                                R.anim.slide_out)//.hide(fragment);
                         .replace(R.id.container, fragment);
 
 //        transaction.add(R.id.container, fragmentTO);
         if (addToBackstack) {
             transaction.addToBackStack(null);
         }
-
         transaction.commit();
     }
 

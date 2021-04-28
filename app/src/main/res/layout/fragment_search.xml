@@ -9,17 +9,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Fragments.CartoonListActivity"
-        android:orientation="vertical">
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".Fragments.CartoonListActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="46dp">
+            android:layout_height="45dp">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
                 app:navigationIcon="@drawable/ic_baseline_menu" />
             <!--   app:title="Menu"   -->
         </com.google.android.material.appbar.AppBarLayout>
