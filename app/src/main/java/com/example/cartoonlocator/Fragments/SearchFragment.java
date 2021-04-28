@@ -33,7 +33,6 @@ import com.example.cartoonlocator.ShowDataSourceFactory;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
 public class SearchFragment extends Fragment {
-    public SearchView showSearch;
     private MainShowListAdapter showAdapter;
     private ShowClient client;
     private ShowDataSourceFactory factory;

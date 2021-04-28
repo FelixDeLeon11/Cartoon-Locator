@@ -44,4 +44,5 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata:2.3.0"
     implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
     implementation 'com.github.rubensousa:gravitysnaphelper:2.2.1'
+    implementation 'com.factor:bouncy:1.8'
 }

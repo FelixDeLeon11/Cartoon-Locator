@@ -1,5 +1,4 @@
 package com.example.cartoonlocator.BookClient;
-
 import android.util.Log;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
@@ -45,17 +44,12 @@ public class ShowClient {
                 String.format("page=%d&", SEARCH_PAGE)+
                 "query="+ query + "&"+
                 "include_adult=false";
-
     }
 
-    private String getApiUrl(String relativeUrl) {
-        return GET_SHOWS_API_URL() + relativeUrl;
-    }
+    ///todo DATE FORMAT = YYYY-MM-DD use moviedb api DISCOVER TV
 
-    // Method for accessing the movie db API
-    public void getShowsList(JsonHttpResponseHandler handler) {
-        //String t = GET_SHOWS_API_URL;
-        client.get(GET_SHOWS_API_URL(), handler);
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
     }
 
     public void getNextShowsList(JsonHttpResponseHandler handler, int page){
@@ -63,15 +57,9 @@ public class ShowClient {
         client.get(GET_SHOWS_API_URL(), handler);
     }
 
-    public void setTotalPages(int totalPages) {
-        this.totalPages = totalPages;
-    }
-
     public void getSearchShowsList(JsonHttpResponseHandler handler, int page, String query) {
         SEARCH_PAGE = page;
         client.get(SEARCH_SHOWS_URL(query), handler);
-        String temp = SEARCH_SHOWS_URL(query);
-        Log.i("d","f");
     }
 }
 
