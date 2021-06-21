@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.paging.LivePagedListBuilder;
@@ -26,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.cartoonlocator.BookClient.ShowClient;
 import com.example.cartoonlocator.Model.Show;
@@ -37,7 +39,6 @@ import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.android.material.navigation.NavigationView;
 
 public class CartoonListActivity extends Fragment {
-    public static final String TAG = "CartoonListActivity";
     public LiveData<PagedList<Show>> shows;
     public ShowDataSourceFactory factory;
     public MainShowListAdapter showAdapter;
@@ -56,7 +57,16 @@ public class CartoonListActivity extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        showAdapter = new MainShowListAdapter(getContext());
+        showAdapter = new MainShowListAdapter(getContext(), (NavigationHost) getActivity() );
+
+        NavigationHost test = (NavigationHost) getActivity();
+
+//        showAdapter.setOnItemClickListener(new MainShowListAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View itemView, int position) {
+//                Toast.makeText(getContext(), "Yes " + position, Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         ShowClient client = new ShowClient();
 

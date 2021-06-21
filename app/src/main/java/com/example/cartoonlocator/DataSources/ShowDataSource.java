@@ -19,16 +19,15 @@ import java.util.List;
 
 import okhttp3.Headers;
 
-public class ShowDataSource extends ItemKeyedDataSource<Integer, Show>{
+public class ShowDataSource extends ItemKeyedDataSource<Integer, Show> {
     public static final String TAG = "CartoonListActivity";
-    ShowClient mClient;
+    public ShowClient mClient;
 
-    public ShowDataSource(ShowClient client){
+    public ShowDataSource(ShowClient client) {
         mClient = client;
     }
 
     public ShowDataSource() {
-
     }
 
     @Override
@@ -40,14 +39,13 @@ public class ShowDataSource extends ItemKeyedDataSource<Integer, Show>{
 
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Show> callback) {
-        Log.i(TAG, "NEED MORE DATA - Load After "+ params.key.toString());
+        Log.i(TAG, "NEED MORE DATA - Load After " + params.key.toString());
         JsonHttpResponseHandler jsonHttpResponseHandler = createShowHandler(callback, true);
-        mClient.getNextShowsList(jsonHttpResponseHandler, params.key+1);
+        mClient.getNextShowsList(jsonHttpResponseHandler, params.key + 1);
     }
 
     @Override
     public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Show> callback) {
-        Log.i(TAG, "NEED MORE DATA - Load Before " + params.key);
     }
 
     @NonNull
@@ -56,7 +54,7 @@ public class ShowDataSource extends ItemKeyedDataSource<Integer, Show>{
         return item.getPage();
     }
 
-    private JsonHttpResponseHandler createShowHandler(final LoadCallback<Show> callback, boolean isAsync) {
+    public JsonHttpResponseHandler createShowHandler(final LoadCallback<Show> callback, boolean isAsync) {
         JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON response) {
@@ -69,21 +67,21 @@ public class ShowDataSource extends ItemKeyedDataSource<Integer, Show>{
                         int maxPage = response.jsonObject.getInt("page");
                         Log.i(TAG, "Successful Request");
                         int pages = response.jsonObject.getInt("total_pages");
-                        mClient.setTotalPages(pages);
+//                        mClient.setTotalPages(pages);
                         shows = Show.fromJsonArray(jsonShows, maxPage);
                         callback.onResult(shows);
                     }
                 } catch (JSONException e) {
                     // Invalid JSON format, show appropriate error.
-                    Log.e(TAG, "UNsuccessful Request",e);
+                    Log.e(TAG, "UNsuccessful Request", e);
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(int statusCode, Headers headers, String responseString, Throwable throwable) {
                 // Handle failed request here
-                Log.e(TAG,
-                        "Request failed with code " + statusCode + ". Response message: " + responseString);
+                Log.e(TAG, "Request failed with code " + statusCode + ". Response message: " + responseString);
             }
         };
         return handler;

@@ -13,14 +13,15 @@
         android:id="@+id/mainShowList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:clipToPadding="false"
-        android:paddingStart="26dp"
-        android:paddingEnd="26dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         app:allow_drag_reorder="true"
         app:allow_item_swipe="false"
-        app:recyclerview_damping_ratio="DAMPING_RATIO_LOW_BOUNCY"
-        app:recyclerview_fling_animation_size=".5"
-        app:recyclerview_overscroll_animation_size=".5"
-        app:recyclerview_stiffness="STIFFNESS_MEDIUM" />
+        app:recyclerview_damping_ratio="DAMPING_RATIO_NO_BOUNCY"
+        app:recyclerview_fling_animation_size=".4"
+        app:recyclerview_overscroll_animation_size=".4"
+        app:recyclerview_stiffness="STIFFNESS_HIGH" />
 </LinearLayout>
 

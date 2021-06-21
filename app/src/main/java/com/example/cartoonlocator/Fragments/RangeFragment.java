@@ -1,12 +1,13 @@
 package com.example.cartoonlocator.Fragments;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -16,15 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.SearchView;
-import android.widget.Toast;
-
 import com.example.cartoonlocator.BookClient.ShowClient;
 import com.example.cartoonlocator.Model.Show;
 import com.example.cartoonlocator.NavigationHost;
@@ -33,23 +25,30 @@ import com.example.cartoonlocator.RecyclerViewAdapters.MainShowListAdapter;
 import com.example.cartoonlocator.ShowDataSourceFactory;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
-public class SearchFragment extends Fragment {
+public class RangeFragment extends Fragment {
+    public String fromDate;
+    public String toDate;
+    private RecyclerView rvShows;
     private MainShowListAdapter showAdapter;
+    private LinearLayoutManager manager;
     private ShowClient client;
     private ShowDataSourceFactory factory;
     private LiveData shows;
-    private String query;
-    private RecyclerView rvShows;
-    private LinearLayoutManager manager;
 
-    public SearchFragment(String query) {
-        this.query = query;
+    public RangeFragment(String fromDate, String toDate){
+        this.fromDate = fromDate;
+        this.toDate = toDate;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_cartoon_list, container, false);
     }
 
     @Override
@@ -69,7 +68,7 @@ public class SearchFragment extends Fragment {
 
         client = new ShowClient();
 
-        factory = new ShowDataSourceFactory(client, query);
+        factory = new ShowDataSourceFactory(client,fromDate,toDate);
         PagedList.Config config = new PagedList.Config.Builder().setPageSize(20).build();
 
         shows = new LivePagedListBuilder(factory, config).build();

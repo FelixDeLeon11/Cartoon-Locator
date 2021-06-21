@@ -9,46 +9,46 @@
         <item
             android:id="@+id/nav_second_fragment"
             android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="2015-2020" />
+            android:title="2015-2019" />
         <item
             android:id="@+id/nav_third_fragment"
             android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="2010-2015" />
+            android:title="2010-2014" />
         <item
             android:id="@+id/nav_fourth_fragment"
             android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="2005-2010" />
+            android:title="2005-2009" />
         <item
             android:id="@+id/nav_fifth_fragment"
             android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="2000-2005" />
+            android:title="2000-2004" />
         <item
             android:id="@+id/nav_sixth_fragment"
             android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="1990-2000" />
+            android:title="1990-1999" />
         <item
             android:id="@+id/nav_seventh_fragment"
             android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="1980-1990" />
+            android:title="1980-1989" />
         <item
             android:id="@+id/nav_eigth_fragment"
             android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="1970-1980" />
+            android:title="1970-1979" />
         <item
             android:id="@+id/nav_ninth_fragment"
             android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="1960-1970" />
+            android:title="1960-1969" />
         <item
             android:id="@+id/nav_10_fragment"
             android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="1950-1960" />
+            android:title="1950-1959" />
         <item
             android:id="@+id/nav_11_fragment"
             android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="1940-1950" />
+            android:title="1940-1949" />
         <item
             android:id="@+id/nav_12_fragment"
             android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="1930-1940" />
+            android:title="1930-1939" />
     </group>
 </menu>
